@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Canto Ore</title>
+  <meta name="theme-color" content="#4A6B53" />
+  <!-- PWA: permette di installarla sul telefono come un'app -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Schermata di caricamento -->
+  <div id="loading" class="center-screen"><div class="spinner"></div></div>
+
+  <!-- Schermata di login -->
+  <section id="login" class="center-screen hidden">
+    <div class="login-card">
+      <div class="logo"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></div>
+      <h1>Canto Ore</h1>
+      <p class="muted">Ore, presenze e pagamenti delle lezioni di canto</p>
+      <div id="demo-banner" class="banner hidden">
+        Modalità demo: Firebase non è ancora configurato, i dati spariscono ricaricando la pagina.
+      </div>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" autocomplete="email" required />
+        <input type="password" id="login-pw" placeholder="Password (min. 6 caratteri)" autocomplete="current-password" minlength="6" required />
+        <button type="submit" class="btn primary full">Accedi</button>
+        <button type="button" id="btn-register" class="btn full">Crea account</button>
+      </form>
+      <div class="sep"><span>oppure</span></div>
+      <button id="btn-google" class="btn full">Accedi con Google</button>
+      <button id="btn-reset" class="link">Password dimenticata?</button>
+      <p id="login-error" class="error"></p>
+    </div>
+  </section>
+
+  <!-- App -->
+  <section id="app" class="hidden">
+    <header class="topbar">
+      <h1 id="page-title">Agenda</h1>
+      <button id="btn-menu" class="icon-btn" aria-label="Menu">•••</button>
+    </header>
+    <main id="view"></main>
+    <button id="fab" class="fab" aria-label="Aggiungi"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    <nav class="tabbar">
+      <button data-tab="lessons" class="active"><svg class="ic" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Agenda</button>
+      <button data-tab="students"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1-4 4-6 7.5-6s6.5 2 7.5 6"/></svg>Studenti</button>
+      <button data-tab="schools"><svg class="ic" viewBox="0 0 24 24"><path d="M3 20.5h18M5 20.5V10l7-5 7 5v10.5M10 20.5v-5h4v5"/></svg>Scuole</button>
+      <button data-tab="reports"><svg class="ic" viewBox="0 0 24 24"><path d="M4 20.5h16M7 17V11M12 17V6M17 17v-8"/></svg>Report</button>
+      <button data-tab="net"><svg class="ic" viewBox="0 0 24 24"><path d="M17.5 6.5A7 7 0 1 0 17.5 17.5M4 10.5h9M4 13.5h9"/></svg>Netto</button>
+    </nav>
+  </section>
+
+  <!-- Finestra modale (form, dettagli) -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="modal-title"></h2>
+        <button class="icon-btn" data-close aria-label="Chiudi">✕</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+rules_version = '2';
+
+// Ogni utente può leggere e scrivere SOLO i propri dati:
+//   users/{suoUid}/schools, users/{suoUid}/students, users/{suoUid}/lessons
+// Tutto il resto è bloccato.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/{collection}/{docId} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == userId
+                         && collection in ['schools', 'students', 'lessons'];
+    }
+  }
+}
